@@ -13,6 +13,59 @@ using namespace std;
 //}
 
 
+string choice_story;
+string choice_story_2;
+string choice_name_confirm;
+string choice_battle;
+string choice_again;
+string dialogue_choice;
+
+
+int HPbar_width;
+
+int handgun_ammo;
+
+int handgun_flag;
+int bat_flag;
+int flag_confirm_name = 0;
+int flag_choice = 0;
+
+
+void battle_start_animation(){
+    system("CLS");
+    PlaySound(TEXT("Battle - Transition.wav"), NULL, SND_FILENAME | SND_ASYNC);                                                                                                                        
+    cout << "    //   ) )     // | |  /__  ___/  /__  ___/     / /        //   / /" << endl;
+    Sleep(50);
+    cout << "   //___/ /     //__| |    / /        / /        / /        //____" << endl; 
+    Sleep(50);
+    cout << "  / __  (      / ___  |   / /        / /        / /        / ____" << endl;    
+    Sleep(50); 
+    cout << " //    ) )    //    | |  / /        / /        / /        //" << endl; 
+    Sleep(50);         
+    cout << "//____/ /    //     | | / /        / /        / /____/ / //____/ /" << endl;    
+    Sleep(100);
+    system("CLS");
+
+}
+
+void intro(){
+    system("CLS");
+    PlaySound(TEXT("Intro.wav"), NULL, SND_FILENAME | SND_ASYNC);
+    cout << "#### ##   ## ##    ## ##              ##     ####       ####   ### ###  ### ###           #### ##   ## ##            ### ##     ####   ### ###  " << endl;
+    Sleep(50);
+    cout << "# ## ##  ##   ##  ##   ##              ##     ##         ##     ##  ##   ##  ##           # ## ##  ##   ##            ##  ##     ##     ##  ##  " << endl;
+    Sleep(50);
+    cout << "  ##     ##   ##  ##   ##            ## ##    ##         ##     ##  ##   ##                 ##     ##   ##            ##  ##     ##     ##      " << endl;
+    Sleep(50);
+    cout << "  ##     ##   ##  ##   ##            ##  ##   ##         ##     ##  ##   ## ##              ##     ##   ##            ##  ##     ##     ## ##   " << endl;
+    Sleep(50);
+    cout << "  ##     ##   ##  ##   ##            ## ###   ##         ##     ### ##   ##                 ##     ##   ##            ##  ##     ##     ##      " << endl;
+    Sleep(50);
+    cout << "  ##     ##   ##  ##   ##            ##  ##   ##  ##     ##      ###     ##  ##             ##     ##   ##            ##  ##     ##     ##  ##  " << endl;
+    Sleep(50);
+    cout << " ####     ## ##    ## ##            ###  ##  ### ###    ####      ##    ### ###            ####     ## ##            ### ##     ####   ### ###  " << endl;
+    Sleep(4500);
+}
 
 class Enemy {
 private:
@@ -22,7 +75,7 @@ private:
     int damage;
 
 public:
-    Enemy(const string& enemyName, int currentHP, int maxtHP, int enemyDamage)
+    Enemy(const string& enemyName, int currentHP, int maxHP, int enemyDamage)
         : name(enemyName), currentHP(currentHP), maxHP(maxHP), damage(enemyDamage) {}
 
     string getName() const {
@@ -45,9 +98,6 @@ public:
         currentHP -= amount;
     }
 };
-
-
-
 
 class Player {
     private:
@@ -115,159 +165,167 @@ class Player {
 };
 
 
-string choice_story;
-string choice_story_2;
-string choice_name_confirm;
-string choice_battle;
-string choice_again;
-string dialogue_choice;
+class Weapon { 
+
+    public:
+    string name;
+    int damage;
+    bool isRanged;
+
+    static const int maxMeleeWeapons = 6;
+    Weapon* collectedMeleeWeapons[maxMeleeWeapons];
+    int numcollectedMeleeWeapons;
+
+    static const int maxRangedWeapons = 6;
+    RangedWeapon* collectedRangedWeapons[maxRangedWeapons];
+    int numcollectedRangedWeapons;
+
+    Weapon(const string& name, int damage)
+     : name(name), damage(damage) {}
+
+    Weapon() : name(""), damage(0) {}  
+
+    void attack (Player& player, Enemy& enemy){
+        cout << "\n\n" << player.getName() << " hits " << name << " to " << enemy.getName() << ", dealing " << damage << " damage!";
+        enemy.takeDamage(damage); 
+    }
+
+    void collectWeapon(const string& weaponName, int weaponDamage, bool isRanged = false, const string& ammoType = "", int ammo = 0);
+
+};
 
 
 
-int HPbar_width;
 
-int Enemy_currentHP;
-int Enemy_maxHP;
-int Enemy_damage;
+class RangedWeapon : public Weapon {
+private:
+    string ammoType;
+    int ammo;
 
-int handgun_ammo;
+public:
+    RangedWeapon(const string& name, int damage, const string& ammoType, int ammo)
+        : Weapon(name, damage), ammoType(ammoType), ammo(ammo) {}
 
-int handgun_flag;
-int bat_flag;
-int flag_confirm_name = 0;
-int flag_choice = 0;
-
-void battle_start_animation(){
-    system("CLS");
-    PlaySound(TEXT("Battle - Transition.wav"), NULL, SND_FILENAME | SND_ASYNC);                                                                                                                        
-    cout << "    //   ) )     // | |  /__  ___/  /__  ___/     / /        //   / /" << endl;
-    Sleep(50);
-    cout << "   //___/ /     //__| |    / /        / /        / /        //____" << endl; 
-    Sleep(50);
-    cout << "  / __  (      / ___  |   / /        / /        / /        / ____" << endl;    
-    Sleep(50); 
-    cout << " //    ) )    //    | |  / /        / /        / /        //" << endl; 
-    Sleep(50);         
-    cout << "//____/ /    //     | | / /        / /        / /____/ / //____/ /" << endl;    
-    Sleep(1000);
-    system("CLS");
-
-}
-
-void intro(){
-    system("CLS");
-    PlaySound(TEXT("Intro.wav"), NULL, SND_FILENAME | SND_ASYNC);
-    cout << "#### ##   ## ##    ## ##              ##     ####       ####   ### ###  ### ###           #### ##   ## ##            ### ##     ####   ### ###  " << endl;
-    Sleep(50);
-    cout << "# ## ##  ##   ##  ##   ##              ##     ##         ##     ##  ##   ##  ##           # ## ##  ##   ##            ##  ##     ##     ##  ##  " << endl;
-    Sleep(50);
-    cout << "  ##     ##   ##  ##   ##            ## ##    ##         ##     ##  ##   ##                 ##     ##   ##            ##  ##     ##     ##      " << endl;
-    Sleep(50);
-    cout << "  ##     ##   ##  ##   ##            ##  ##   ##         ##     ##  ##   ## ##              ##     ##   ##            ##  ##     ##     ## ##   " << endl;
-    Sleep(50);
-    cout << "  ##     ##   ##  ##   ##            ## ###   ##         ##     ### ##   ##                 ##     ##   ##            ##  ##     ##     ##      " << endl;
-    Sleep(50);
-    cout << "  ##     ##   ##  ##   ##            ##  ##   ##  ##     ##      ###     ##  ##             ##     ##   ##            ##  ##     ##     ##  ##  " << endl;
-    Sleep(50);
-    cout << " ####     ## ##    ## ##            ###  ##  ### ###    ####      ##    ### ###            ####     ## ##            ### ##     ####   ### ###  " << endl;
-    Sleep(4500);
-}
-
-string Generate_Player_HP_bar(int Player_currentHP, int Player_maxHP, int HPbar_width) {
-    float BarRatio = static_cast<float>(Player_currentHP) / Player_maxHP;
-    int FillBar = static_cast<int>(BarRatio * HPbar_width);
-
-    string Player_HP_bar = "[";
-    for (int i = 0; i < HPbar_width; i++) {
-        if (i < FillBar) {
-            Player_HP_bar += "=";
-        } else {
-            Player_HP_bar += " ";
+    void shoot(Player& player, Enemy& enemy) {
+        if (ammo > 0) {
+            cout << "\n\n" << player.getName() << "shoots " << name << " to " << enemy.getName() << ", dealing " << damage << " damage!";
+            enemy.takeDamage(damage);
+            ammo--;
+        }
+        else {
+            cout << "\n\nYou have no " << ammoType << " left!";
         }
     }
-    Player_HP_bar += "]";
+};
 
-    return Player_HP_bar;
-}
+    void Weapon::collectWeapon(const string& weaponName, int weaponDamage, bool isRanged = false, const string& ammoType = "", int ammo = 0) {
+        if (isRanged) {
+                collectedRangedWeapons[numcollectedRangedWeapons] = new RangedWeapon(weaponName, weaponDamage, ammoType, ammo);
+                numcollectedRangedWeapons++;
+                cout << "\nYou collected a ranged weapon: " << weaponName << endl;
+            } 
 
-string Generate_Player_ULT_bar(int Player_currentULT, int Player_maxULT, int HPbar_width) {
-    float BarRatio = static_cast<float>(Player_currentULT) / Player_maxULT;
-    int FillBar = static_cast<int>(BarRatio * HPbar_width);
-
-    string Player_ULT_bar = "[";
-    for (int i = 0; i < HPbar_width; i++) {
-        if (i < FillBar) {
-            Player_ULT_bar += "=";
-        } else {
-            Player_ULT_bar += " ";
+        else {
+            collectedMeleeWeapons[numcollectedMeleeWeapons] = new Weapon(weaponName, weaponDamage);
+            numcollectedMeleeWeapons++;
+            cout << "\nYou collected a melee weapon: " << weaponName << endl;
         }
     }
-    Player_ULT_bar += "]";
 
-    return Player_ULT_bar;
-}
+    void weaponInventory(const string* collectedMeleeWeapons, int numCollectedMeleeWeapons, const string* collectedRangedWeapons, int numCollectedRangedWeapons) {
+        cout << "Select the weapon to use: " << endl;
+        cout << "Melee Weapons:" << endl;
+        for (int i = 0; i < numCollectedMeleeWeapons; i++) {
+            cout << "[" << (i + 1) << "]" << ": " << collectedMeleeWeapons[i] << endl;
+        }
 
-string Generate_Enemy_HP_bar(int Enemy_currentHP, int Enemy_maxHP, int HPbar_width) {
-    float BarRatio = static_cast<float>(Enemy_currentHP) / Enemy_maxHP;
-    int FillBar = static_cast<int>(BarRatio * HPbar_width);
-
-    string Enemy_HP_bar = "[";
-    for (int i = 0; i < HPbar_width; i++) {
-        if (i < FillBar) {
-            Enemy_HP_bar += "=";
-        } else {
-            Enemy_HP_bar += " ";
+        cout << "Ranged Weapons:" << endl;
+        for (int i = 0; i < numCollectedRangedWeapons; i++) {
+            cout << "[" << (i + 1) << "]" << ": " << collectedRangedWeapons[i] << endl;
         }
     }
-    Enemy_HP_bar += "]";
 
-    return Enemy_HP_bar;
+
+
+string Generate_Player_HP_bar(const Player& player, int HPbar_width) {
+    float BarRatio = static_cast<float>(player.getCurrentHP()) / player.getMaxHP();
+    int FillBar = static_cast<int>(BarRatio * HPbar_width);
+
+    string playerHPBar = "[";
+    for (int i = 0; i < HPbar_width; i++) {
+        if (i < FillBar) {
+            playerHPBar += "=";
+        } else {
+            playerHPBar += " ";
+        }
+    }
+    playerHPBar += "]";
+
+    return playerHPBar;
+}
+
+string Generate_Player_ULT_bar(const Player& player, int HPbar_width) {
+    float BarRatio = static_cast<float>(player.getCurrentULT()) / player.getMaxULT();
+    int FillBar = static_cast<int>(BarRatio * HPbar_width);
+
+    string playerULTBar = "[";
+    for (int i = 0; i < HPbar_width; i++) {
+        if (i < FillBar) {
+            playerULTBar += "=";
+        } else {
+            playerULTBar += " ";
+        }
+    }
+    playerULTBar += "]";
+
+    return playerULTBar;
+}
+
+string Generate_Enemy_HP_bar(const Enemy& enemy, int HPbar_width) {
+    float BarRatio = static_cast<float>(enemy.getCurrentHP()) / enemy.getMaxHP();
+    int FillBar = static_cast<int>(BarRatio * HPbar_width);
+
+    string enemyHPBar = "[";
+    for (int i = 0; i < HPbar_width; i++) {
+        if (i < FillBar) {
+            enemyHPBar += "=";
+        } else {
+            enemyHPBar += " ";
+        }
+    }
+    enemyHPBar += "]";
+
+    return enemyHPBar;
 }
 
 
-void battle_start(Player& player, Enemy& enemy) {
+void battle_start(Player& player, Enemy& enemy, Weapon &weapon) {
     int battle_On = 1;
+    int Player_damage;
 
     PlaySound(TEXT("Dread - Battle.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
 
     do {
         do {
-            string playerHPBar = Generate_Player_HP_bar(player.getCurrentHP(), player.getMaxHP(), HPbar_width);
-            string playerULTBar = Generate_Player_ULT_bar(player.getCurrentULT(), player.getMaxULT(), HPbar_width);
+            string playerHPBar = Generate_Player_HP_bar(player, HPbar_width);
+            string playerULTBar = Generate_Player_ULT_bar(player, HPbar_width);
             cout << "\n" << player.getName() << " readies their weapon!";
             cout << "\n" << player.getName() << " HP: " << playerHPBar << " " << player.getCurrentHP() << "/" << player.getMaxHP();
             cout << "\n" << player.getName() << " ULT Bar: " << playerULTBar << " " << player.getCurrentULT() << "/" << player.getMaxULT();
 
-            string enemyHPBar = Generate_Enemy_HP_bar(enemy.getCurrentHP(), enemy.getMaxHP(), HPbar_width);
+            string enemyHPBar = Generate_Enemy_HP_bar(enemy, HPbar_width);
             cout << "\n\n" << enemy.getName() << " is preparing to attack!";
             cout << "\n" << enemy.getName() << " HP: " << enemyHPBar << " " << enemy.getCurrentHP() << "/" << enemy.getMaxHP();
 
             flag_choice = 0;
+            
             cout << "\n\nWhat do you want to do?";
             cout << "\n1. Attack\n2. Use an item\n3. Use Ultimate" << endl;
             cin >> choice_battle;
 
-            if (choice_battle == "1" && handgun_flag == 1) {
-                if (handgun_ammo > 0) {
-                    cout << "\n" << player.getName() << " shoots the gun, and deals " << Player_damage << " damage to " << enemy.getName() << "!";
-                    player.setDamage(player.getDamage());
-                    player.Ultimate(enemy);
-                    handgun_ammo--;
-                    flag_choice = 1;
-                } 
-                
-                else {
-                    cout << "\n\nYou have no handgun ammo left!";
-                }
-
-            } 
-            
-            else if (choice_battle == "1" && bat_flag == 1) {
-
-                cout << "\n" << player.getName() << " swings the bat, and deals " << Player_damage << " damage to " << enemy.getName() << "!";
-                flag_choice = 1;
-            } 
-
+            if (choice_battle == "1"){
+                weaponInventory(collectedMeleeWeapons, numCollectedMeleeWeapons, collectedRangedWeapons, numCollectedRangedWeapons);
+            }
             else if (choice_battle == "2") {
                 // Implement item usage logic
             } 
@@ -323,7 +381,7 @@ void battle_start(Player& player, Enemy& enemy) {
                 
                 else if (choice_again == "N" || choice_again == "n") {
                     cout << "Thank you for playing Too Alive to Die!";
-                    return;
+                    exit(0);
                 } 
                 
                 else {
@@ -338,52 +396,74 @@ void battle_start(Player& player, Enemy& enemy) {
 }
 
 void scenarioA2(Player &player){
-
-    cout << "\n\n\"Great. Come with me.\"";
+    Sleep(2000);
     cout << "\n\nThe man leads you to the direction he came from. Now that you take a good look at him, he doesn't seem to be a patient. He is wearing casual civilian clothes; a vest and pants. What is he planning to do here?";
+    Sleep(2000);
     cout <<  "He leads you through many halls, many of which are clear of the things you saw. He's walking really fast. He goes down a set of stairs, leading you along.";
+    Sleep(2000);
     cout << "\n\n\"Got any questions? That look on your face says a lot. You trusted me, so I'll answer your questions.\"";
     do {
-    cout << "You say:\n1. What are we doing, exactly?\n2. Why are you helping me?\n3. --> What's the rush?";
-    cin >> dialogue_choice;
-    flag_choice = 0;
+        Sleep(2000);
+        cout << "You say:\n1. What are we doing, exactly?\n2. Why are you helping me?\n3. --> What's the rush?";
+        cin >> dialogue_choice;
+        flag_choice = 0;
 
-        if (dialogue_choice == "1"){
-            cout << "\n\n\"We're getting the virus. The only sample of the virus left.\"";
-            cout  << "\n\n\"And yes. The things you saw, the things that are roaming this place, they're infected. They're not who they were anymore.\"";
-        }
+            if (dialogue_choice == "1"){
+                Sleep(2000);
+                cout << "\n\n\"We're getting the virus. The only sample of the virus left.\"";
+                Sleep(2000);
+                cout  << "\n\n\"And yes. The things you saw, the things that are roaming this place, they're infected. They're not who they were anymore.\"";
+            }
 
-        else if (dialogue_choice == "2"){
-            cout << "\n\n\"Let's just say it's to feel good about myself. Let's leave it at that.\"";
-        }
+            else if (dialogue_choice == "2"){
+                Sleep(2000);
+                cout << "\n\n\"Let's just say it's to feel good about myself. Let's leave it at that.\"";
+            }
 
-        else if (dialogue_choice == "3"){
-            cout << "\n\n\"We need to get to the lab as soon as possible.\" Santiago keeps striding.";
-            cout << "\n\n\"This place is going to blow up.\"";
-            flag_choice = 1;
-        }
+            else if (dialogue_choice == "3"){
+                Sleep(2000);
+                cout << "\n\n\"We need to get to the lab as soon as possible.\" The man keeps striding.";
+                Sleep(2000);
+                cout << "\n\n\"This place is going to blow up.\"";
+                flag_choice = 1;
+            }
 
-        else {
-            cout << "Try again.";
-            flag_choice = 0;
-        }
+            else {
+                cout << "Try again.";
+                flag_choice = 0;
+            }
 
     }while (flag_choice == 0);
 
+    Sleep(2000);
     cout << "\n\nThe facility is going to blow up? What does he mean by that?";
+    Sleep(2000);
     cout << "\n\n\"Someone rigged this place to blow. We have 30 minutes. We better hustle, or we go poof.\"";
+    Sleep(2000);
     cout << "\n\nHe stops, and looks at you.\"Name's Santiago. What's your name, muchacho?\"";
+    Sleep(2000);
     cout << "\n\nYou tell him your name. The stairs go way down, only separated by levels. Throughout the trip, you see levels E1 to F5. It seems like a long way down.";
-    cout << "\n\n\"\"" << player.getName() << ", huh? I'll remember that.\" He nodded to himself, and continues walking.";
+    Sleep(4000);
+    cout << "\n\n\"" << player.getName() << ", huh? I'll remember that.\" He nodded to himself, before walking.";
+    Sleep(2000);
     cout << "\n\nAs you're both going down the stairs for what seemed an eternity, Santiago stops you.";
+    Sleep(2000);
     cout << "\n\n\"Shh. Two of them. You see them?\"";
+    Sleep(2000);
     cout  << "\n\nSantiago was right. Two of the infected are blocking the way down. They seem... more deformed, their muscles and tendons showing rather than skin.";
+    Sleep(4000);
     cout << "\n\n\"Hunters. They react to sound.\"";
     cout << "\n\nSantiago throws a rock through the open door in level F6. As expected, the Hunters quickly pursued the rock into the door.";
-    cout << "\n\nSantiago then ushers you to follow him, going down the stairs once more. You follow suit";
-    cout << "\n\nThen, you accidentally step on a  piece of meat.";
-    cout << "\n\nThe Hunters hear it, and immediately shriek.";
-    cout << "\n\n\"Damn it! Hearing's sharper than  my ex's tongue! Let's give 'em hell!\"";
+    Sleep(4000);
+    cout << "\n\nSantiago then ushers you to follow him, going down the stairs once more. You follow suit.";
+    Sleep(2000);
+    cout << "\n\nThen, you accidentally step on a piece of meat.";
+    Sleep(2000);
+    cout << "\n\nThe Hunters hear it, and immediately let out a screech.";
+    PlaySound(TEXT("Hunter_sound.wav"), NULL, SND_FILENAME | SND_ASYNC);
+    Sleep(4000);
+    cout << "\n\n\"Damn it! Their hearing's sharper than my ex's tongue! Let's give 'em hell!\"";
+    Sleep(2000);
 
     Enemy enemy ("Hunter", 200, 200, 40);
     battle_start_animation();
@@ -391,14 +471,17 @@ void scenarioA2(Player &player){
 
     cout << "\n\n\"We managed to live through that. You alright?\"";
     do {
+        Sleep(2000);
         cout << "\n\nYou say:\n1. I'm alright. Barely a scratch.\n2. I almost died.";
         cin >> dialogue_choice;
 
         if (dialogue_choice == "1"){
+            Sleep(2000);
             cout << "\n\n\"Good. If you can talk like that, then you're fine.\" He continues going down the stairs. \"We're not much far now. The labs are close. Need to take any bathroom breaks?\"";
         }
 
         else if (dialogue_choice == "2"){
+            Sleep(2000);
             cout << "\n\n\"Good.\" He continues going down the stairs. \"We're not much far now. The labs are close. Need to take any bathroom breaks?\"";
         }
 
@@ -409,29 +492,43 @@ void scenarioA2(Player &player){
     } while (flag_choice == 0);
 
     cout << "\n\nJust as he says that, the stairs stop at level F10. This time, the door is closed. It has a scanner for keycards.";
+    Sleep(2000);
     cout << "\n\nSantiago punches the card to the scanner, and the door automatically opens, revealing yet another long hallway inside.";
+    Sleep(2000);
     cout << "\n\nYou both head inside. It's dimly lit, with green lightsticks and broken fluorescent light tubes littered around the place.";
+    Sleep(2000);
     cout << "\n\nThe place was thrashed around.";
+    Sleep(2000);
     cout << "\n\nYou both go through a series of doors, keeping quiet to not attract infected.";
+    Sleep(2000);
     cout << "\n\nAs you're following Santiago, you see an open room. You look closely, and see a chainsaw inside!";
+    Sleep(2000);
        //add scene
     cout << "\n\n\"This is it.\" Santiago says, stopping at an entrance of a door. \" Plenty of infected through this door. There's no turning back. You still in?\"";
-    
+    Sleep(2000);
+
     do {
+        Sleep(2000);
         cout << "\n\nYou say/do:\n1. --> You think? I'm ready for this.\n2. --> *Kick the door open.*";
         flag_choice = 0;
         cin >> dialogue_choice;
         if (dialogue_choice == "1"){
+            Sleep(2000);
             cout << "\n\n\"Then let's do this.\" Santiago nods, before opening the door slowly. Unfortunately, the door bumped into an infected, making it shriek, and alerting all six in the room.";
+            Sleep(2000);
             cout << "\n\n\"The hell!?\"";
+            Sleep(2000);
             //add enemy
             battle_start_animation();
             battle_start(player, enemy);
         }
 
         else if (dialogue_choice == "2"){
+            Sleep(2000);
             cout << "\n\n\"What the hell are you doing!?\" Santiago exclaims, the door flinging an infected blocking it as its head gets cut off.";
+            Sleep(2000);
             cout << "\n\nThe sound alerts the five infected in the room. \"So much for being quiet!\"";
+            Sleep(2000);
             //add enemy
             battle_start_animation();
             battle_start(player, enemy);
@@ -487,8 +584,6 @@ void scenarioA(Player& player){
 
     Enemy enemy ("Dead(?) Body", 50, 50, 20);
 
-    PlaySound(TEXT("Battle - Transition.wav"), NULL, SND_FILENAME | SND_ASYNC);
-    Sleep(1200);
     intro();
     battle_start_animation();
     battle_start(player, enemy);
@@ -553,7 +648,8 @@ void scenarioA(Player& player){
     }
     else if (dialogue_choice == "2"){
         Sleep(2000);
-        cout << "\n\n\"That's the spirit.\" The man says, before walking to the direction you found him in.";
+        cout << "\n\"Great. Come with me.\"";
+        scenarioA2(player);
 
     }
 
@@ -591,14 +687,14 @@ int main(){
 
     system("CLS");
 
+
     string playerName;
     HPbar_width = 20;
-    handgun_flag = 0;
-    bat_flag = 0;
 
 
     PlaySound(TEXT("Looming Dread.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
-    Player player("Unnamed Patient", 100, 0);
+    Player player("Unnamed Patient", 100, 100);
+    Weapon weapon;
 
     cout << "You wake up in a small room surrounded by white walls, a bright lightbulb hanging from above.";
     Sleep(2000);
@@ -635,7 +731,7 @@ int main(){
     Sleep(4000);
     cout << "\n\n(*A story choice with a preceding \"-->\" will advance the story.)";
     cout << "\n\nYou decide to:";
-    Sleep(1000);
+    Sleep(100);
 
     do{
     cout << "\n1. Read the piece of paper.\n2. --> Get out of the room.\n3. Peek out." << endl;
@@ -665,7 +761,7 @@ int main(){
     cout << "\nYou look around the corridors once more. It's really quiet. In one room, you see a body, lying on its belly, limp on the floor. A pool of dry blood seems to have oozed from the body.";
     Sleep(5000);
     cout << "\n\nYou decide to:";
-    Sleep(1000);
+    Sleep(100);
 
 
     
@@ -678,8 +774,7 @@ int main(){
         cout << "\nThe body seems... dead. It was obvious, with the way it's lying down on its belly. Its gender is almost impossible to speculate, as its hair is long, but its body build, masculine.";
         Sleep(5000);
         cout << "\n\nYour eyes catch a glimpse of the body's hand. It's a handgun. You grab it immediately, and instinctively back away. Whatever caused all of this must be dangerous.";
-        handgun_flag = 1;
-        handgun_ammo = 3;
+        weapon.collectWeapon("Handgun", 15, true, "Handgun Ammo", 3);
         flag_choice = 1;
         scenarioA(player);
     }
@@ -688,7 +783,7 @@ int main(){
         cout << "\nWhatever's in that room, it's too big of a risk to get. It's like you felt that something was going to happen the moment you set foot in that room.";
         Sleep(2000);
         cout << "\n\nYou continue deeper into the corridor. You find a bat, lying on the ground. You decide to take it. Feels sturdy enough.";
-        bat_flag = 1;
+        weapon.collectWeapon("Bat", 15);
         flag_choice = 1;
         scenarioB(player);
     }
