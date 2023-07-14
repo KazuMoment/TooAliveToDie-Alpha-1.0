@@ -4,6 +4,7 @@
 #include <mmsystem.h>
 #include <ctime>
 #include <stack>
+#include <chrono>
 
 #pragma comment(lib,"winmm.lib")
 
@@ -1032,6 +1033,7 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
 
     do {
         do {
+            system("CLS");
             string playerHPBar = Generate_Player_HP_bar(player, HPbar_width);
             string playerULTBar = Generate_Player_ULT_bar(player, HPbar_width);
             cout << "\n" << player.getName() << " readies their weapon!";
@@ -1064,36 +1066,42 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
                     if (choice_weapon == "Bat"){
                         player.setcritwithDamage(15, 60);;
                         cout << "\n" << player.getName() << " swings the Bat, and deals " << player.getDamage() << " damage to " << enemy.getName() << "!";
+                        Sleep(3000);
                         player.chargeULT(20);
                         flag_choice = 1;
                     }  
                     else if (choice_weapon == "Knife"){
                         player.setcritwithDamage(30, 40);
                         cout << "\n" << player.getName() << " slices using the Knife, and deals " << player.getDamage() << " damage to " << enemy.getName() << "!";
+                        Sleep(3000);
                         player.chargeULT(30);
                         flag_choice = 1;
                     }
                     else if (choice_weapon == "Metal Pipe"){
                         player.setcritwithDamage(18, 30);
                         cout << "\n" << player.getName() << " bashes using the Metal Pipe, and deals " << player.getDamage() << " damage to " << enemy.getName() << "!";
+                        Sleep(3000);
                         player.chargeULT(22);
                         flag_choice = 1;
                     }
                     else if (choice_weapon == "Katana"){
                         player.setcritwithDamage(33, 40);
                         cout << "\n" << player.getName() << " slices and dices using the Katana, and deals " << player.getDamage() << " damage to " << enemy.getName() << "!";
+                        Sleep(3000);
                         player.chargeULT(33);
                         flag_choice = 1;
                     }
                     else if (choice_weapon == "Crowbar"){
                         player.setcritwithDamage(22, 25);
                         cout << "\n" << player.getName() << " claws through using the Crowbar, and deals " << player.getDamage() << " damage to " << enemy.getName() << "!";
+                        Sleep(3000);
                         player.chargeULT(20);
                         flag_choice = 1;
                     }
                     else if (choice_weapon == "Chainsaw"){
                         player.setcritwithDamage(33, 30);
                         cout << "\n" << player.getName() << " saws through using the Chainsaw, and deals " << player.getDamage() << " damage to " << enemy.getName() << "!";
+                        Sleep(3000);
                         player.chargeULT(40);
                         flag_choice = 1;
                     }
@@ -1104,12 +1112,14 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
                                 player.setDamage(45);
                             }
                             cout << "\n" << player.getName() << " shoots the Handgun, and deals " << player.getDamage() << " damage to " << enemy.getName() << "!";
+                            Sleep(3000);
                             player.chargeULT(25);
                             handgun_ammo--;
                             flag_choice = 1;
                         }
                         else {
                             cout << "\nYou don't have any Handgun Ammo left!";
+                            Sleep(3000);
                         }
 
                     }
@@ -1117,78 +1127,91 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
                         if (AR15_ammo > 0){
                             player.setDamage(40);
                             cout << "\n" << player.getName() << " shoots the AR15, and deals " << player.getDamage() << " damage to " << enemy.getName() << "!";
-                            player.chargeULT(30);
+                            Sleep(3000);
+                            player.chargeULT(40);
                             AR15_ammo--;
                             flag_choice = 1; 
                         }  
                         else {
                             cout << "\nYou don't have any AR15 Ammo left!";
+                            Sleep(3000);
                         }
                     }
                     else if (choice_weapon == "Sniper"){
                         if (sniper_ammo > 0){
                             player.setDamage(70);
                             cout << "\n" << player.getName() << " shoots the Sniper, and deals " << player.getDamage() << " damage to " << enemy.getName() << "!";
+                            Sleep(3000);
                             player.chargeULT(55);
                             sniper_ammo--;
                             flag_choice = 1; 
                         }  
                         else {
                             cout << "\nYou don't have any Sniper Ammo left!";
+                            Sleep(3000);
                         }
                     }
                     else if (choice_weapon == "Shotgun"){
                         if (shotgun_ammo > 0){
                             player.setDamage(50);
                             cout << "\n" << player.getName() << " shoots the Shotgun, and deals " << player.getDamage() << " damage to " << enemy.getName() << "!";
+                            Sleep(3000);
                             player.chargeULT(60);
                             shotgun_ammo--;
                             flag_choice = 1; 
                         }  
                         else {
                             cout << "\nYou don't have any Shotgun ammo left!";
+                            Sleep(3000);
                         }
                     }
                     else if (choice_weapon == "MP5"){
                         if (MP5_ammo > 0){
                             player.setDamage(35);
                             cout << "\n" << player.getName() << " shoots the MP5, and deals " << player.getDamage() << " damage to " << enemy.getName() << "!";
+                            Sleep(3000);
                             player.chargeULT(44);
                             MP5_ammo--;
                             flag_choice = 1; 
                         }  
                         else {
                             cout << "\nYou don't have any MP5 Ammo left!";
+                            Sleep(3000);
                         }
                     }
                     else if (choice_weapon == "Red9"){
                         if (red9_ammo > 0){
                             player.setDamage(46);
                             cout << "\n" << player.getName() << " shoots the Red9, and deals " << player.getDamage() << " damage to " << enemy.getName() << "!";
+                            Sleep(3000);
                             player.chargeULT(34);
                             red9_ammo--;
                             flag_choice = 1; 
                         }  
                         else {
                             cout << "\nYou don't have any Red9 Ammo left!";
+                            Sleep(3000);
                         }
                     }
                     else if (choice_weapon == "Grenade Launcher"){
                         if (grenadeLauncher_ammo > 0){
                             player.setDamage(4250);
                             cout << "\n" << player.getName() << " shoots the Grenade Launcher, and deals " << player.getDamage() << " damage to " << enemy.getName() << "!";
+                            Sleep(3000);
                             player.chargeULT(50);
                             grenadeLauncher_ammo--;
                             flag_choice = 1; 
                         }  
                         else {
                             cout << "\nYou don't have any Grenade Launcer Ammo left!";
+                            Sleep(3000);
                         }
                     }
 
                 }
                 else {
                     cout << "\n\nInvalid choice. Try again.";
+                    Sleep(3000);
                 }
                 
                 
@@ -1204,22 +1227,26 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
                     consumables[0].quantity -= 1;
                     player.heal(10000);
                     cout << "\n" << player.getName() << " used First Aid Kit! They gain full HP! They now have " << player.getCurrentHP() << " HP!"; 
+                    Sleep(3000);
                     flag_choice = 1;
                 }
                 else if (choice_consumable == "2" && consumables[1].quantity > 0){
                     consumables[1].quantity -= 1;
                     player.heal(100);
                     cout << "\n" << player.getName() << " used Bandages! They gain 100 HP! They now have " << player.getCurrentHP() << " HP!"; 
+                    Sleep(3000);
                     flag_choice = 1;                
                 }  
                 else if (choice_consumable == "3" && consumables[2].quantity > 0){
                     consumables[2].quantity -= 1;
                     player.heal(80);
                     cout << "\n" << player.getName() << " used Alcohol! They gain 80 HP! They now have " << player.getCurrentHP() << " HP!";
+                    Sleep(3000);
                     flag_choice = 1; 
                 } 
                 else{
                     cout << "\nYou don't have enough of that item!";
+                    Sleep(3000);
                 } 
 
             }
@@ -1232,6 +1259,7 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
 
             else if (choice_battle == "3" && player.getCurrentULT() != player.getMaxULT()) {
                 cout << player.getName() << " tries to use their Ultimate, but failed! The Ultimate Bar has to be full!";
+                Sleep(3000);
             } 
 
             else if (choice_battle == "4"){
@@ -1243,9 +1271,45 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
                 flag_choice = 1;
             } 
 
+            
+            else if (choice_battle == "KILLYOURSELF") {
+                player.takeDamage(player.getMaxHP());
+                flag_choice = 1;
+            } 
+
+            else if(choice_battle == "HESOYAM"){
+                cout << "\n\nYou heal yourself!";
+                Sleep(3000);
+                player.heal(player.getMaxHP());
+                flag_choice = 1;
+            }
+
+            else if (choice_battle == "BAGUVIX"){
+                cout << "\n\nYou have infinite health!";
+                Sleep(3000);
+                HPbar_width = 40;
+                player.setMaxHP(10000000000);
+                player.heal(player.getMaxHP());
+                flag_choice = 1;
+            }
+
+            else if (choice_battle == "FULLCLIP"){
+                cout << "\n\nYou get unlimited ammo!";
+                Sleep(3000);
+                handgun_ammo += 100000;
+                AR15_ammo += 100000;
+                MP5_ammo += 100000;
+                shotgun_ammo += 100000;
+                red9_ammo += 100000;
+                sniper_ammo += 100000;
+                grenadeLauncher_ammo += 100000;
+                flag_choice = 1;    
+            }   
+
             else if (choice_battle == "DROPKICK"){
                 player.setcritwithDamage(1000,50);
                 cout << "\n\n" << player.getName() << " dropkicks " << enemy.getName() << "! It deals " << player.getDamage() << " damage!";
+                Sleep(3000);
                 player.chargeULT(40);
                 flag_choice = 1;
             }
@@ -1253,12 +1317,14 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
             else if (choice_battle == "MAG"){
                 player.setcritwithDamage(50,50);
                 cout << "\n\n" << player.getName() << " shoots the Magnum! It deals " << player.getDamage() << " damage!";
+                Sleep(3000);
                 player.chargeULT(100);
                 flag_choice = 1;
             }
             
             else {
                 cout << "\nInvalid choice.";
+                Sleep(3000);
             }
 
         } while (flag_choice == 0);
@@ -1267,6 +1333,7 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
 
         if (Gamma_flag == 1){
             cout << "\n\nWe don't have enough firepower!";
+            Sleep(3000);
             turns++; 
             if (turns == 12){
                 break;
@@ -1274,6 +1341,7 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
         }
         if (Mastermind_flag == 1){
             cout << "\n\n\"Puny inferior imbeciles.\"";
+            Sleep(3000);
             turns++; 
             if (turns == 8){
                 break;
@@ -1282,28 +1350,35 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
 
         if (Santiago_flag == 1){
             cout << "\n\nSantiago shoots with his Red9! He deals 35 damage!"; 
+            Sleep(3000);
             enemy.takeDamage(35);
             if (handgun_ammo <= 0 && give_times < 3){
                 cout << "\n\n\"Out of ammo, huh? Catch!\"";
+                Sleep(3000);
                 cout << "\n\nSantiago gives you 5 Handgun Ammo!";
+                Sleep(3000);
                 handgun_ammo = 5;
             }
         }
 
         if (Rena1_flag == 1){
             cout << "\n\n??? slices with her Knife! She deals 20 damage!";
+            Sleep(3000);
             enemy.takeDamage(20);
             if (handgun_ammo <=0 && give_times < 3){
                 cout << "\n\n??? gives you 5 Handgun Ammo!";
+                Sleep(3000);
                 handgun_ammo = 5;
             }
         }
 
         if (Rena2_flag == 1){
             cout << "\n\nRena slices with her Knife! She deals 20 damage!";
+            Sleep(3000);
             enemy.takeDamage(20);
             if (handgun_ammo <= 0 && give_times < 3){
                 cout << "\n\nRena gives you 5 Handgun Ammo!";
+                Sleep(3000);
                 handgun_ammo = 5;
             }
         }
@@ -1311,27 +1386,32 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
         if (Piper_flag == 1){
             if (turns == 3){
                 cout << "\n\nPiper shoots with her Rocket Launcher! She deals 200 damage!";
+                Sleep(3000);
                 enemy.takeDamage(200);
                 turns = 0;
                 }
             else {
                 cout << "\n\n\"Damn thing is charging! Hold on!\"";
+                Sleep(3000);
                 turns++;
             }
         }
 
         if (JACK1_flag == 1){
             cout << "\n\n??? shoots with his Handgun! He deals 25 damage!";
+            Sleep(3000);
             enemy.takeDamage(25);
         }
 
         if (JACK2_flag == 1){
             cout << "\n\nJACK shoots with his Magnum! He deals 50 damage!";
+            Sleep(3000);
             enemy.takeDamage(50);
         }
 
         if (enemy.getCurrentHP() > 0) {
             cout << "\n\n" << enemy.getName() << " attacks! You take " << enemy.getDamage() << " damage!";
+            Sleep(3000);
             player.takeDamage(enemy.getDamage());
         }
 
@@ -1353,12 +1433,14 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
         if (player.getCurrentHP() <= 0) {
             battle_On = 0;
             cout << "\n\n" << player.getName() << " died!";
+            Sleep(3000);
             lose();
             choices.Display_Choices();
             
             do {
                 cout << "\nWould you like to try again? [Y/n]: ";
                 cin >> choice_again;
+                Sleep(3000);
                 if (choice_again == "Y" || choice_again == "y") {
                     flag_choice = 1;
                     death_flag = 1;
@@ -1367,7 +1449,7 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
                 else if (choice_again == "N" || choice_again == "n") {
                     cout << "Thank you for playing Too Alive to Die!";
                     Sleep(4000);
-                    exit(0);
+                    death_flag = 1;
                 } 
                 
                 else {
@@ -1379,6 +1461,7 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
         }
 
     } while (battle_On == 1);
+    system("CLS");
 }
 
 
@@ -1400,6 +1483,7 @@ void scenarioA2(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
     Sleep(2000);
     cout << "\n\n??? now fights by your side!";
     Santiago_flag = 1;
+    Sleep(2000);
     cout << "\n\nThe man leads you to the direction he came from. Now that you take a good look at him, he doesn't seem to be a patient. He is wearing casual civilian clothes; a vest and pants. What is he planning to do here?";
     Sleep(2000);
     cout <<  "\n\nHe leads you through many halls, many of which are clear of the things you saw. He's walking really fast. He goes down a set of stairs, leading you along.";
@@ -1409,6 +1493,7 @@ void scenarioA2(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
         Sleep(2000);
         cout << "\n\nYou say:\n1. What are we doing, exactly?\n2. Why are you helping me?\n3. --> What's the rush?\n";
         cin >> dialogue_choice;
+        system("CLS");
         flag_choice = 0;
 
             if (dialogue_choice == "1"){
@@ -1478,6 +1563,7 @@ void scenarioA2(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
     A2enemy.pop();
 
     cout << "\n\nAs the Hunters die, they melt, dropping a Crowbar!";
+    Sleep(3000);
     addWeapon(collectedWeapons,"Crowbar");
 
     PlaySound(TEXT("Sound Effects/Pick Up.wav"), NULL, SND_FILENAME | SND_ASYNC);
@@ -1491,15 +1577,18 @@ void scenarioA2(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
         Sleep(2000);
         cout << "\n\nYou say:\n1. I'm alright. Barely a scratch.\n2. I almost died.\n";
         cin >> dialogue_choice;
+        system("CLS");
 
         if (dialogue_choice == "2"){
             Sleep(2000);
             cout << "\n\n\"Good. If you can talk like that, then you're fine.\" He continues going down the stairs. \"We're not much far now. The labs are close. Need to take any bathroom breaks?\"";
+            Sleep(3000);
         }
 
         else if (dialogue_choice == "1"){
             Sleep(2000);
             cout << "\n\n\"Good.\" He continues going down the stairs. \"We're not much far now. The labs are close. Need to take any bathroom breaks?\"";
+            Sleep(3000);
         }
 
         else {
@@ -1526,6 +1615,7 @@ void scenarioA2(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
         cout << "\n\nYou say/do:\n1. --> You think? I'm ready for this.\n2. --> *Kick the door open.*\n";
         flag_choice = 0;
         cin >> dialogue_choice;
+        system("CLS");
         if (dialogue_choice == "1"){
             choices.addDialogueChoice("Waited for Santiago to open the door.");
             Sleep(2000);
@@ -1624,6 +1714,7 @@ void scenarioA2(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
         flag_choice = 0;
         cout << "\n\nYou say:\n1. Is this lab where the virus was made?\n2. --> So the sample... It's here?\n";
         cin >> dialogue_choice;
+        system("CLS");
 
         if (dialogue_choice == "1"){
             Sleep(1000);
@@ -1649,6 +1740,7 @@ void scenarioA2(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
         flag_choice = 0;
         cout << "\n\nYou say:\n1. What do you plan on doing with the sample?\n2. How'd you even know about all of this stuff?\n3. --> Wait for him to open the safe.\n";
         cin >> dialogue_choice;
+        system("CLS");
         if (dialogue_choice == "1"){
             Sleep(2000);
             cout << "\n\n\"This sample will help us find a cure. There is an Anti-Quadrangle party that I know that has the resources to make a cure.\"";
@@ -1797,14 +1889,14 @@ void scenarioA2(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
     handgun_ammo += 6;
     Sleep(3000);
         
-    PlaySound(TEXT("Music/Fearful is No Word for It.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC); 
+    PlaySound(TEXT("Music/Dread is Fearful.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC); 
     cout << "\n\n\"We got three!\"";
     Sleep(3000);
     cout << "\n\n\"System Meltdown in 5 minutes. Please evacuate. Please evacuate.\"";
     Sleep(3000);
     cout << "\n\n\"Just in time, yeah, muchacho?\"";
     Sleep(3000);
-    cout << "\n\nYou both were about to reach the elevaor door, until...";
+    cout << "\n\nYou both were about to reach the elevator door, until...";
     Sleep(3000);
     cout << "\n\nYou both were flung by an unknown force back to the middle of the bridge.";
     Sleep(3000);
@@ -1827,7 +1919,19 @@ void scenarioA2(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
     Sleep(4000);
     cout << "\n\n\"And you, patient!\" The man exclaims, \"Weren't you a product of the experiments!? Your new power, is there!\"";
     Sleep(5000);
-    cout << "\n\n\"He may be right, but he blabs his mouth a lot! Let's end this, muchacho!\"";
+    cout << "\n\n\"You, " << player.getName() << ", are Patient One! The only successful host after Patient Zero!\""; 
+    Sleep(4000);
+    cout << "\n\nWhat is he saying? You were the successful patient all this time...? But what about the amnesia?";
+    Sleep(4000);
+    cout << "\n\n\"You, Patient One!\" The man says, \"You were the key! I was able to achieve power! Until you were set back!\"";
+    Sleep(4000);
+    cout << "\n\n\"You had all the knowledge, but you lost your control!\"";
+    Sleep(3000);
+    cout << "\n\n\"You! You started this outbreak!\"";
+    Sleep(3000);
+    cout << "\n\n\"Wesker's wrong, muchacho. He's pinning the blame on you.\" Santiago said, \"He was the one that lost control of the entire lab. He was reckless.\"";
+    Sleep(5000);
+    cout << "\n\n\"Enough!\" The man, Wesker, interrupted. \"I will kill you!\"";
     Sleep(3000);
     cout << "\n\nYou look at Santiago, and he nods at you.";
     Sleep(3000);
@@ -1896,7 +2000,7 @@ void scenarioA2(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
     Sleep(3000);
     cout << "\n\n\"Hey!\" A woman's voice was heard from the right bridge.";
     Sleep(3000);
-    cout << "\n\nThe man looked irritated, but still sets his eyes on you.";
+    cout << "\n\nWesker looked irritated, but still sets his eyes on you.";
     Sleep(3000);
     cout << "\n\n\"Take this!\" The voice said, a grenade launcher falling beside you.";
     Sleep(3000);
@@ -2005,6 +2109,7 @@ void scenarioA2(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
         do{
             cout << "\n\nYou do:\n1. --> Accept.\n2. --> Decline.\n";
             cin >> dialogue_choice;
+            system("CLS");
             if (dialogue_choice == "1"){
                 cout << "\n\nYou take the stick, and Santiago lights it for you.";
                 Sleep(5000);
@@ -2057,7 +2162,6 @@ void scenarioA2(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
         else if (choice_again == "N" || choice_again == "n") {
             cout << "Thank you for playing Too Alive to Die!";
             Sleep(4000);
-            exit(0);
         } 
                 
         else {
@@ -2076,10 +2180,6 @@ void scenarioA1(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
     A1enemy.push(Enemy("The Butcher", 1000, 1000, 40));
     A1enemy.push(Enemy("Nine-Limbs", 200, 200, 20));
     A1enemy.push(Enemy("Nine-Limbs", 200, 200, 20));
-    A1enemy.push(Enemy("Nine-Limbs", 200, 200, 20));
-    A1enemy.push(Enemy("Screecher", 300, 300, 30));
-    A1enemy.push(Enemy("Screecher", 300, 300, 30));
-    A1enemy.push(Enemy("Screecher", 300, 300, 30));
     A1enemy.push(Enemy("Nine-Limbs", 200, 200, 20));
     A1enemy.push(Enemy("Dead Body(?)", 150, 150, 20));   
     A1enemy.push(Enemy("Dead Body(?)", 150, 150, 20));   
@@ -2102,89 +2202,93 @@ void scenarioA1(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
     cout << "\n\nWhat will you do?\n1. Risk it and fight the things.\n2. Run back to where you found the man.\n";
     
     do{
-    cin >> dialogue_choice;
-    flag_choice = 0;
-    if (dialogue_choice == "1"){
-        Enemy &A1enemy1 = A1enemy.top();
-        Sleep(2000);
-        cout << "\n\nYou decide to fight the weak one first!";
-        Sleep(2000);
-        battle_start_animation();
-        battle_start(player, A1enemy1, consumables, choices);
-        if (death_flag == 1){
-            return;
-        }  
-        A1enemy.pop();
-        PlaySound(TEXT("Music/Looming Dread.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
-        cout << "\n\nThe weak thing dies, and drops the metal pipe!";
-        Sleep(2000);
-        addWeapon(collectedWeapons, "Metal Pipe");
-        PlaySound(TEXT("Music/Looming Dread.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
-        cout << "\n\nThat wasn't that much of a problem. Those two of his friends are the only thing to worry about now.";
-        Sleep(2000);
-        cout << "\n\nSuddenly, something attacks you from behind! You manage to dodge it, but that was close.";
-        Sleep(2000);
-        cout << "\n\nYou turn to face it, and it was a little girl! She's holding a knife! It seems that she is intent on killing you! But why?";
-        Sleep(2000);
-        cout << "\n\nThere's no choice! You have to defend yourself!";
-        Sleep(3000);
-        Enemy &A1enemy2 = A1enemy.top();
-        battle_start_animation();
-        battle_start(player, A1enemy2, consumables, choices);
-        if (death_flag == 1){
-            return;
-        }          
-        flag_choice = 1;
-    }
-    else if (dialogue_choice == "2"){
-        Enemy &A1enemy1 = A1enemy.top();
-        A1enemy.pop();
-        Sleep(2000);
-        cout << "\n\nYou try to go back, but you bump into someone. You were certain it was a person.";
-        Sleep(2000);
-        cout << "\n\nWhen you gather your bearings, you see a little girl holding a knife. She's shaking as she tries to stand her guard.";
-        Sleep(2000);
-        cout << "\n\nYou say:\n1. It's alright. I won't hurt you.\n2. What's a kid doing around here?\n";
-     
-        do{
-        flag_choice = 0;
         cin >> dialogue_choice;
+        flag_choice = 0;
         if (dialogue_choice == "1"){
-            choices.addDialogueChoice("It's alright. I won't hurt you.");
+            Enemy &A1enemy1 = A1enemy.top();
             Sleep(2000);
-            cout << "\n\nThe little girl calms down, but her eyes show that she's wary of you. She raises her knife to strike.";
+            cout << "\n\nYou decide to fight the weak one first!";
             Sleep(2000);
+            battle_start_animation();
+            battle_start(player, A1enemy1, consumables, choices);
+            if (death_flag == 1){
+                return;
+            }  
+            PlaySound(TEXT("Music/Looming Dread.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
+            cout << "\n\nThe weak thing dies, and drops the metal pipe!";
+            Sleep(2000);
+            addWeapon(collectedWeapons, "Metal Pipe");
+            PlaySound(TEXT("Music/Looming Dread.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
+            cout << "\n\nThat wasn't that much of a problem. Those two of his friends are the only thing to worry about now.";
+            Sleep(2000);
+            cout << "\n\nSuddenly, something attacks you from behind! You manage to dodge it, but that was close.";
+            Sleep(2000);
+            cout << "\n\nYou turn to face it, and it was a little girl in a cloak! She's holding a knife! It seems that she is intent on killing you! But why?";
+            Sleep(2000);
+            cout << "\n\nThere's no choice! You have to defend yourself!";
+            Sleep(3000);
+            A1enemy.pop();
             Enemy &A1enemy2 = A1enemy.top();
             battle_start_animation();
             battle_start(player, A1enemy2, consumables, choices);
             if (death_flag == 1){
                 return;
-            }  
+            }          
+            A1enemy.pop();
             flag_choice = 1;
         }
         else if (dialogue_choice == "2"){
-            choices.addDialogueChoice("What's a kid doing around here?");
-            Sleep(2000);
-            cout << "\n\nThe little girl just tightens her grip on the knife in response, strengthening her resolve. It's like she's ready to attack.";
-            Sleep(2000);
+            Enemy &A1enemy1 = A1enemy.top();
             A1enemy.pop();
-            Enemy &A1enemy3 = A1enemy.top();
-            battle_start_animation();
-            battle_start(player, A1enemy3, consumables, choices);
-            if (death_flag == 1){
-                return;
-            }             
-            flag_choice = 1;
-        }
-        else{
-            cout << "\n\nTry again.";
-        }
-        }while (flag_choice == 0);
+            Sleep(2000);
+            cout << "\n\nYou try to go back, but you bump into someone. You were certain it was a person.";
+            Sleep(2000);
+            cout << "\n\nWhen you gather your bearings, you see a little girl in a cloak holding a knife. She's shaking as she tries to stand her guard.";
+            Sleep(2000);
+            
+     
+        do{
+            cout << "\n\nYou say:\n1. It's alright. I won't hurt you.\n2. What's a kid doing around here?\n";
+            flag_choice = 0;
+            cin >> dialogue_choice;
+            system("CLS");
+            if (dialogue_choice == "1"){
+                choices.addDialogueChoice("It's alright. I won't hurt you.");
+                Sleep(2000);
+                cout << "\n\nThe little girl calms down, but her eyes show that she's wary of you. She raises her knife to strike.";
+                Sleep(5000);
+                Enemy &A1enemy2 = A1enemy.top();
+                battle_start_animation();
+                battle_start(player, A1enemy2, consumables, choices);
+                if (death_flag == 1){
+                    return;
+                }  
+                A1enemy.pop();
+                flag_choice = 1;
+            }
+            else if (dialogue_choice == "2"){
+                choices.addDialogueChoice("What's a kid doing around here?");
+                Sleep(2000);
+                cout << "\n\nThe little girl just tightens her grip on the knife in response, strengthening her resolve. It's like she's ready to attack.";
+                Sleep(2000);
+                A1enemy.pop();
+                Enemy &A1enemy3 = A1enemy.top();
+                battle_start_animation();
+                battle_start(player, A1enemy3, consumables, choices);
+                if (death_flag == 1){
+                    return;
+                }             
+                flag_choice = 1;
+            }
+            else{
+                cout << "\n\nTry again.";
+            }
+            }while (flag_choice == 0);
     }
     else{
         cout << "\n\nInvalid choice. Try again.";
     }
-}while (flag_choice == 0);
+    }while (flag_choice == 0);
     
     Sleep(2000);
     PlaySound(TEXT("Music/Looming Dread.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
@@ -2192,10 +2296,12 @@ void scenarioA1(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
     Sleep(2000);
     cout << "\n\nThroughout the fight, it seemed that she was holding back. She lies there, on the ground, looking at you with fear.";
     Sleep(2000);
-    cout << "\n\nYou do:\n1. You ignore her, and fight the rest of the enemies.\n2. You help her stand up.";
+    
     do{ 
+        cout << "\n\nYou do:\n1. You ignore her, and fight the rest of the enemies.\n2. You help her stand up.\n";
         flag_choice = 0;
         cin >> dialogue_choice;
+        system("CLS");
         if (dialogue_choice == "1"){
             choices.addDialogueChoice("You ignore Rena, and fight the rest of the enemies.");
             Sleep(2000);
@@ -2205,6 +2311,8 @@ void scenarioA1(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
             Sleep(2000);
             cout << "\n\n??? now fights by your side!";
             Rena1_flag = 1;
+            Sleep(2000);
+            A1enemy.pop();
             Enemy &A1enemy4 = A1enemy.top();
             battle_start_animation();
             battle_start(player, A1enemy4, consumables, choices);
@@ -2216,10 +2324,13 @@ void scenarioA1(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
         else if (dialogue_choice == "2"){
             Sleep(2000);
             choices.addDialogueChoice("You help her stand up.");
+            flag_friends = 1;
             cout << "\n\nYou help her up. She looks at the Infected behind you, then nods her head. It seems she knows what you want to do.";
-            Sleep(2000);
+            Sleep(4000);
             cout << "\n\n??? now fights by your side!";
             Rena1_flag = 1;
+            Sleep(2000);
+            A1enemy.pop();
             Enemy &A1enemy4 = A1enemy.top();
             battle_start_animation();
             battle_start(player, A1enemy4, consumables, choices);
@@ -2236,6 +2347,371 @@ void scenarioA1(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
     }while (flag_choice == 0);
 
 
+    cout << "\n\n??? gives you 5 Handgun Ammo!";
+    PlaySound(TEXT("Sound Effects/Pick Up.wav"), NULL, SND_FILENAME | SND_ASYNC);
+    handgun_ammo += 5;
+    Sleep(3000);
+    PlaySound(TEXT("Music/Looming Dread.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC); 
+    cout << "\n\nYou then attack the last Infected!";
+    Sleep(3000);
+
+    A1enemy.pop();
+    Enemy &A1enemy5 = A1enemy.top();
+    battle_start_animation();
+    battle_start(player, A1enemy5, consumables, choices);
+    if (death_flag == 1){
+        return;
+    }         
+    
+    PlaySound(TEXT("Music/Looming Dread.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC); 
+    cout << "\n\nYou breathe in and out fast. That was exhausting,";
+    Sleep(3000);
+    cout << "\n\nIt seems that the little girl is doing the same. Though her voice sounds more strained.";
+    Sleep(3000);
+    cout << "\n\n\"Rena.\" She says.";
+    Sleep(3000);
+    do{
+        flag_choice = 0;
+        cout << "\n\nYou do\n1. --> What?\n2. --> " << player.getName() << "." << endl;
+        cin >> dialogue_choice;
+        if (dialogue_choice == "1"){
+            Sleep(3000);
+            cout << "\n\n\"My name is Rena...\" The little girl says.";
+            flag_choice = 1;
+        }
+        else if (dialogue_choice == "2"){
+            Sleep(3000);
+            cout << "\"" << player.getName() << "...\""; 
+            flag_choice  = 1;
+        }
+        else{
+            cout << "\n\nTry again.";
+        }
+    }while (flag_choice = 0);
+
+    cout << "\n\nYou then head over to the elevator in the center of the area. You press a button, but it instead displays an X mark on the screen.";
+    Sleep(4000);
+    cout << "\n\n\"Needs a keycard...\" Rena says.";
+    Sleep(3000);
+    do{
+        flag_choice = 0;
+        Sleep(3000);
+        cout << "\n\nYou say:\n1. Where's the closest keycard?\n2. Why are you wearing a cloak? You hiding something there?\n3. --> Let's go.\n";
+        cin >> dialogue_choice;
+        system("CLS");
+        if (dialogue_choice == "1"){
+            cout << "\n\n\"West Wing...\" Rena says. You turn to your left, and see a bridge extending to a narrow passage, the same as the opening where you found the elevator.";
+            Sleep(5000);
+        }
+        else if (dialogue_choice == "2"){   
+            if (flag_friends == 1){
+                Sleep(3000);
+                cout << "\n\nShe shows you a bite mark on her left arm.";
+                Sleep(3000);
+                cout << "\n\nIf it doesn't get treated immediately, she'll turn into one of those things.";
+                Sleep(3000);
+                cout << "\n\nYou breathe in, and try to reassure her.";
+                Sleep(3000);
+            }
+            else{
+                Sleep(3000);
+                cout << "\n\nShe doesn't answer.";
+            }
+        }
+        else if (dialogue_choice == "3"){
+            flag_choice = 1;
+        }
+        else {
+            cout << "\n\nTry again.";
+        }
+    
+    }while (flag_choice == 0);
+
+    Sleep(3000);
+    cout << "\n\nShe leads you to the West Wing.";
+    Sleep(3000);
+    cout << "\n\n\"System Meltdown will begin in 20 minutes. Please evacuate.\" The system warns.";
+    Sleep(4000);
+    cout << "\n\nYou pick up the pace. Rena does so as well.";
+    Sleep(3000);
+    cout << "\n\n\"So where is the keycard?\" You ask.";
+    Sleep(3000);
+    cout << "\n\n\"Biology Lab...\" Rena says meekly.";
+    Sleep(3000);
+    cout << "\n\nYou nod, and look at the signs. The Biology Lab is just ahead.";
+    Sleep(3000);
+    cout << "\n\nBefore you could go any further, an Infected with nine limbs attached to its body bursts out of a closed door!";
+    Sleep(4000);
+    cout << "\n\nIt's a horrifying creature of abomination. Multiple different parts of different colors are attached by staples and stitches.";
+    Sleep(5000);
+    cout << "\n\nIt moves as if it was a ball, using its arms and legs to roll. The sounds of its limbs moving are like those of a cockroach.";
+    PlaySound(TEXT("Sound Effects/nine-limbs.wav"), NULL, SND_FILENAME | SND_ASYNC);
+    Sleep(5000);
+    cout << "\n\nYou prepare yourself.";
+    Sleep(3000);
+
+    A1enemy.pop();
+    Enemy &A1enemy6 = A1enemy.top();
+    battle_start_animation();
+    battle_start(player, A1enemy6, consumables, choices);
+    if (death_flag == 1){
+        return;
+    }         
+
+    PlaySound(TEXT("Music/Looming Dread.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC); 
+    cout << "\n\nThe noises seem to attract more of those things, and they attack!";
+    Sleep(3000);
+    cout << "\n\nYou prepare yourselves!";
+    Sleep(3000);
+    
+    A1enemy.pop();
+    Enemy &A1enemy7 = A1enemy.top();
+    battle_start_animation();
+    battle_start(player, A1enemy7, consumables, choices);
+    if (death_flag == 1){
+        return;
+    }   
+
+    cout << "\n\nThe Nine-Limbs drop an AR15 with 10 AR15 ammo!";
+    addWeapon(collectedWeapons, "AR15");
+    AR15_ammo = 10;
+    PlaySound(TEXT("Music/Looming Dread.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC); 
+    cout << "\n\nOne more appears!";
+    Sleep(3000);
+    cout << "\n\nYou prepare yourselves!";
+    Sleep(3000);
+
+    A1enemy.pop();
+    Enemy &A1enemy9 = A1enemy.top();
+    battle_start_animation();
+    battle_start(player, A1enemy9, consumables, choices);
+    if (death_flag == 1){
+        return;
+    }   
+    cout << "\n\nRena gives you one of her Knives!";
+    addWeapon (collectedWeapons, "Knife");
+    PlaySound(TEXT("Music/Looming Dread.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC); 
+    cout << "\n\nYou both quickly head inside the Biology Lab with Rena.";
+    Sleep(3000);
+    cout << "\n\nInside, it's not what you expected.";
+    Sleep(3000);
+    cout << "\n\nThe room was filled with flesh. It makes you almost puke.";
+    Sleep(3000);
+    cout << "\n\nThere were a lot of bear traps hanging on the wall. This used to be an ordinary lab, but it was disturbed.";
+    Sleep(4000);
+    cout << "\n\nIt's as if someone else owned the place now.";
+    Sleep(3000);
+    cout << "\n\nRealizing this, you quickly search for the keycard, opening every drawer and cabinet.";
+    Sleep(4000);
+    cout << "\n\nWhile searching, you found a... tube of an unkown liquid?";
+    Sleep(3000);
+    cout << "\n\nIt's bluish in color. What is it for?";
+    Sleep(3000);
+    cout << "\n\nThere's also a note from where you found the liquid.";
+    Sleep(3000);
+    do{
+        flag_choice = 0;
+        cout << "\n\nYou do:\n1. --> Read the note.\n2. --> Keep searching for the keycard.\n";
+        cin >> dialogue_choice;
+        system("CLS");
+        if (dialogue_choice == "1"){
+            Sleep(4000);
+            choices.addDialogueChoice("Read the note.");
+            cout << "\n\nThere's a lot of words on the note. They seem to be describing a certain chemical.";
+            Sleep(4000);
+            cout << "\n\nYou don't know what the first part means due to the medical jargo. It takes a while to understand.";
+            Sleep(4000);
+            cout << "\n\nThe last part, you can read. It says that the tube contains the suppressant for the virus.";
+            Sleep(4000);
+            cout << "\n\nWhich means that it can cure someone of their early stage Infection.";
+            Sleep(3000);
+            if (flag_friends == 1){
+                cout << "\n\nYou look at Rena. You give her a nod.";
+                Sleep(3000);
+                cout << "\n\nYou inject her with the suppressant. It should stop the Infection.";
+                Sleep(4000);
+                cout << "\n\nYou then find the keycard and head to the elevator with Rena.";
+                Sleep(3000);
+                flag_friends++;
+            }
+            else{
+                cout << "\n\nYou don't seem to have a need for it. Might as well keep it just in case.";
+                Sleep(3000);
+                cout << "\n\nYou then find the keycard and head to the elevator with Rena.";
+                Sleep(4000);
+            }
+            flag_choice = 1;
+        }
+        else if (dialogue_choice == "2"){
+            choices.addDialogueChoice("Kept searching for the keycard.");
+            cout << "\n\nYou keep searching for the keycard, and you eventually found it. It took a bit of searching, but you can finally get out of here.";
+            Sleep(4000);
+            cout << "\n\nYou go with Rena to the elevator.";
+            Sleep(3000);
+            flag_choice = 2;
+        }
+        else{
+            cout << "\n\nTry again.";
+        }
+    }while (flag_choice == 0);
+
+    if (flag_choice  == 1){
+        track = "DreadFearful";
+        cout << "\n\nYou open the elevator, but then you face a tall Infected.";
+        Sleep(3000);
+        cout << "\n\nIt has a Chainsaw.";
+        Sleep(3000);
+        cout << "\n\nIt must be the one that stays in the Biology Lab. It even is holding one of its bear traps on hand.";
+        Sleep(4000);
+        cout << "\n\nYou fight the Butcher! Final boss!";
+        Sleep(3000);
+        A1enemy.pop();
+        Enemy &A1enemy8 = A1enemy.top();
+        battle_start_animation();
+        battle_start(player, A1enemy8, consumables, choices);
+        if (death_flag == 1){
+            return;
+        }   
+    }
+
+    if (flag_choice == 2 && flag_friends <= 1) {
+        cout << "\n\nYou open the elevator, and head inside.";
+        Sleep(3000);
+        cout << "\n\nThen you notice Rena coughing.";
+        Sleep(3000);
+        cout << "\n\nShe shows you a bite mark on her arm.";
+        Sleep(3000);
+        cout << "\n\nShe hesitantly gives you her hidden gun. She is telling you to kill her.";
+        Sleep(4000);
+        do{
+            flag_choice = 0;
+            cout << "\n\nYou do:\n1. You kill her. \n2. You leave her.\n3. You take her with you.\n";
+            if (flag_friends == 1){
+                cout << "4. Inject her with the suppressant.";
+            }
+            cin >> dialogue_choice;
+            system("CLS");
+            if (dialogue_choice == "1"){
+                choices.addDialogueChoice("Killed Rena.");
+                Sleep(3000);
+                cout << "\n\nYou shoot her.";
+                PlaySound(TEXT("Sound Effects/red9.wav"), NULL, SND_FILENAME | SND_ASYNC);
+                Sleep(4000);
+                cout << "\n\nShe smiles and puts your hand to her face.";
+                Sleep(3000);
+                cout << "\n\n\"Thank you...\" She says in her final words.";
+                Sleep(3000);
+                PlaySound(TEXT("Music/Drive.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC); 
+                cout << "\n\nYou slowly, dejectedly press the button on the elevator to go up.";
+                Sleep(5000);
+                cout << "\n\nYou wait, and once you arrive, you step outside.";
+                Sleep(5000);
+                cout << "\n\nYou grip the gun tightly.";
+                Sleep(5000);
+                cout << "\n\nWhy does it have to end this way?";
+                Sleep(5000);
+                cout << "\n\nYou win! You escaped the zombies!";
+                Sleep(5000);
+            }
+            else if (dialogue_choice == "2"){
+                choices.addDialogueChoice("Left Rena.");
+                cout << "\n\nSeeing your hesitance, she steps out of the elevator.";
+                Sleep(3000);
+                PlaySound(TEXT("Music/Drive.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC); 
+                cout << "\n\nYou slowly, dejectedly press the button on the elevator to go up.";
+                Sleep(5000);
+                cout << "\n\nYou wait, and once you arrive, you step outside.";
+                Sleep(5000);
+                cout << "\n\nYou grip the gun tightly.";
+                Sleep(5000);
+                cout << "\n\nWhy does it have to end this way?";
+                Sleep(5000);
+                cout << "\n\nYou win! You escaped the zombies!";
+                Sleep(5000);
+            }
+
+            else if (dialogue_choice == "3"){
+                choices.addDialogueChoice("Forced Rena to come.");
+                cout << "\n\nYou take her in. She refuses, but you force her.";
+                Sleep(3000);
+                cout << "\n\nThere must be a way. There has to be.";
+                Sleep(3000);
+                PlaySound(TEXT("Music/Drive.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC); 
+                cout << "\n\nYou quickly press the button on the elevator.";
+                Sleep(5000);
+                cout << "\n\nYou arrive to the surface, and start walking with her.";
+                Sleep(5000);
+                cout << "\n\nThere should be a way.";
+                Sleep(5000);
+                cout << "\n\nYou win! You escaped the zombies!";
+                Sleep(5000);
+            }
+
+            else if (dialogue_choice == "4" && flag_friends == 1){
+                choices.addDialogueChoice("Saved Rena.");
+                cout << "\n\nYou inject her with the suppresant.";
+                Sleep(3000);
+                cout << "\n\nShe stares at you in shock. Her coughing seems to have stopped.";
+                Sleep(3000);
+                cout << "\n\nShe smiles, and says...";
+                Sleep(3000);
+                cout << "\n\n\"Thank you.\"";
+                Sleep(3000);
+                PlaySound(TEXT("Music/Drive.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC); 
+                cout << "\n\nYou smile, and press the button on the elevator.";
+                Sleep(5000);
+                cout << "\n\nYou arrive to the surface, and start walking with her.";
+                Sleep(5000);
+                cout << "\n\nWhat would happen next, you wonder?";
+                Sleep(5000);
+                cout << "\n\nMaybe you'll just try to survive.";
+                Sleep(5000);
+                cout << "\n\nYou win! You escaped the zombies!";
+                Sleep(5000);
+            }
+            else {
+                cout << "\n\nTry again.";
+            }
+        }while (flag_choice == 0);
+    }
+    else if (flag_friends == 2){
+                choices.addDialogueChoice("Saved Rena.");
+                PlaySound(TEXT("Music/Drive.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC); 
+                cout << "\n\nYou run to the elevator with her, and press the button.";
+                Sleep(5000);
+                cout << "\n\nYou arrive to the surface, and start walking with her.";
+                Sleep(5000);
+                cout << "\n\nWhat would happen next, you wonder?";
+                Sleep(5000);
+                cout << "\n\nMaybe you'll just try to survive.";
+                Sleep(5000);
+                cout << "\n\nYou win! You escaped the zombies!";
+                Sleep(5000);
+    }
+
+    choices.Display_Choices();
+
+    do {
+        flag_choice = 0;
+        cout << "\nWould you like to try again? [Y/n]: ";
+        cin >> choice_again;
+        if (choice_again == "Y" || choice_again == "y") {
+            flag_choice = 1;
+            return;
+        } 
+                
+        else if (choice_again == "N" || choice_again == "n") {
+            cout << "Thank you for playing Too Alive to Die!";
+            Sleep(4000);
+        } 
+                
+        else {
+            cout << "Invalid input. Try again.";
+        }
+
+    } while (flag_choice == 0);
+
+
 }
 
 void scenarioA(Player& player, Consumable consumables[], Dialogue_List choices){
@@ -2243,7 +2719,7 @@ void scenarioA(Player& player, Consumable consumables[], Dialogue_List choices){
     Sleep(3000);
     cout << "\n\nYou were ready, with the pistol in hand. Fortunately for you, you had training for these types of weapons. You don't know how or why, but muscle memory just works.";
     Sleep(5000);
-    cout << "\n\nYou decide to check the magazine, and repulse upon peering at it. You have three bullets. What's that gonna do in this situation!?";
+    cout << "\n\nYou decide to check the magazine, and repulse upon peering at it. You have four bullets. What's that gonna do in this situation!?";
     Sleep(5000);
     cout << "\n\nYou sigh, and load the magazine back into the gun. Whatever's out there, it's better that you're ready for it.";
     Sleep(5000);
@@ -2259,9 +2735,11 @@ void scenarioA(Player& player, Consumable consumables[], Dialogue_List choices){
     intro();
     battle_start_animation();
     battle_start(player, enemy, consumables, choices);
+        if (death_flag == 1){
+        return;
+    }
 
     cout << "\n\nThe shooting seems to have attracted a lot of whatever that body was. You don't have much ammo left.";
-    //zombies sound
     PlaySound(TEXT("Music/Looming Dread.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
     Sleep(3000);
     cout << "\n\nYou decide to book it and run deeper into the corridors.";
@@ -2278,6 +2756,7 @@ void scenarioA(Player& player, Consumable consumables[], Dialogue_List choices){
     Sleep(500);
     cout << "\n1. A patient? What do you mean?\n2. What is this place?\n3. What are you here for?\n4. --> What are you planning to do?" << endl;
     cin >> dialogue_choice;
+    system("CLS");
     
     if (dialogue_choice  == "1"){
         Sleep(2000);
@@ -2314,6 +2793,7 @@ void scenarioA(Player& player, Consumable consumables[], Dialogue_List choices){
         flag_choice = 0;
         cout << "\n\nYou say:\n1. --> I don't know who you are. No deal.\n2. --> Let's go." << endl;
         cin >> dialogue_choice;
+        system("CLS");
         
         if (dialogue_choice == "1"){
             choices.addDialogueChoice("Did not go with Santiago.");
@@ -2369,10 +2849,12 @@ void scenarioB1(Player &player, Consumable consumables[], Dialogue_List &choices
     Sleep(2000);
     cout << "\n\nThis is dangerous. It's over if he pulls the trigger.";
     Sleep(2000);
-    cout << "\n\nYou say/do:\n1. What do you want?\n2. Try to disarm him.\n";
+    
     do{
+        cout << "\n\nYou say/do:\n1. What do you want?\n2. Try to disarm him.\n";
         flag_choice = 0;
         cin >> dialogue_choice;
+        system("CLS");
         if (dialogue_choice == "1"){
             choices.addDialogueChoice("Asked JACK what he wants");
             Sleep(2000);
@@ -2432,6 +2914,7 @@ void scenarioB1(Player &player, Consumable consumables[], Dialogue_List &choices
         cout << "\n\nYou say:\n1. What is this facility for?\n2. What's your name?\n3. --> Let's go.\n";
         flag_choice = 0;
         cin >> dialogue_choice;
+        system("CLS");
         if (dialogue_choice == "1"){
             Sleep(2000);
             cout << "\n\n\"The start of the outbreak.\"";
@@ -2479,6 +2962,7 @@ void scenarioB1(Player &player, Consumable consumables[], Dialogue_List &choices
         cout << "\n\nYou do:\n1. --> Follow him\n2. Read the note.\n";
         flag_choice = 0;
         cin >> dialogue_choice;
+        system("CLS");
         if (dialogue_choice == "1"){
             flag_choice = 1;
         }
@@ -2556,6 +3040,7 @@ void scenarioB1(Player &player, Consumable consumables[], Dialogue_List &choices
         flag_choice = 0;
         cout << "\n\nYou say:\n1. What company do you work for?\n2. Were you ordered to plant the bombs?\n3. --> What's the next place?\n";
         cin >> dialogue_choice;
+        system("CLS");
         if (dialogue_choice == "1"){
             Sleep(2000);
             cout << "\n\n\"Quadrangle.\"";
@@ -2746,6 +3231,7 @@ void scenarioB1(Player &player, Consumable consumables[], Dialogue_List &choices
         flag_choice = 0;
         cout << "\n\nYou do:\n1. Pick up the item.\n2. Keep running.\n";
         cin >> dialogue_choice;
+        system("CLS");
         if (dialogue_choice == "1"){
             Sleep(3000);
             cout << "\n\nYou pick up the item. It seems to be... a Chainsaw!";
@@ -2889,6 +3375,7 @@ void scenarioB1(Player &player, Consumable consumables[], Dialogue_List &choices
         do{
             cout << "\n\nYou do:\n1. --> Accept.\n2. --> Decline.\n";
             cin >> dialogue_choice;
+            system("CLS");
             if (dialogue_choice == "1"){
                 cout << "\n\nYou shake his hand.";
                 flag_choice = 1;
@@ -2956,7 +3443,6 @@ void scenarioB1(Player &player, Consumable consumables[], Dialogue_List &choices
         else if (choice_again == "N" || choice_again == "n") {
             cout << "Thank you for playing Too Alive to Die!";
             Sleep(4000);
-            exit(0);
         } 
                 
         else {
@@ -3044,6 +3530,7 @@ void scenarioB2 (Player &player, Consumable consumables[], Dialogue_List &choice
         flag_choice = 0;
         cout << "\n\nYou say:\n1. Where are we going?\n2. --> Where are you using that?\n";
         cin >> dialogue_choice;
+        system("CLS");
         if (dialogue_choice == "1"){
             Sleep(3000);
             cout << "\n\nA little friend told me that we can just migrate to the moon.";
@@ -3081,6 +3568,7 @@ void scenarioB2 (Player &player, Consumable consumables[], Dialogue_List &choice
         flag_choice = 0;
         cout << "\n\nYou say:\n1. --> What the hell did you just do!?\n2. --> That's just reckless!\n";
         cin >> dialogue_choice;
+        system("CLS");
         if (dialogue_choice == "1"){
             choices.addDialogueChoice("Asked what she did.");
             Sleep(2000);
@@ -3145,6 +3633,7 @@ void scenarioB2 (Player &player, Consumable consumables[], Dialogue_List &choice
         flag_choice = 0;
         cout << "\n\nYou do:\n1. --> You think of the Infected as target practice.\n2. --> You just think of them as real Infected.\n";
         cin >> dialogue_choice;
+        system("CLS");
         if (dialogue_choice == "1"){
             choices.addDialogueChoice("Thought of the enemies as target practice.");
             Sleep(3000);
@@ -3219,6 +3708,7 @@ void scenarioB2 (Player &player, Consumable consumables[], Dialogue_List &choice
         flag_choice = 0;
         cout << "\n\nYou do:\n1. --> Search around for supplies.\n2. --> Head to the exit as fast as possible.\n";
         cin >> dialogue_choice; 
+        system("CLS");
         if (dialogue_choice == "1"){
             choices.addDialogueChoice("Searched for supplies.");
             Sleep(3000);
@@ -3399,6 +3889,7 @@ void scenarioB2 (Player &player, Consumable consumables[], Dialogue_List &choice
         flag_choice = 0;
         cout << "\n\nYou say:\n1. You made it yourself?\n2. What is a rocket doing here anyway?\n3. --> We'll ride that to the moon?\n";
         cin >> dialogue_choice;
+        system("CLS");
         if (dialogue_choice == "1"){
             Sleep(3000);
             cout << "\n\n\"Yup! This bad boy has enough power to get to the moon in 3 hours!\"";
@@ -3446,6 +3937,7 @@ void scenarioB2 (Player &player, Consumable consumables[], Dialogue_List &choice
         flag_choice = 0;
         cout << "\n\nYou do:\n1. --> Follow the Hunter Blobs.\n2. --> Don't.\n";
         cin >> dialogue_choice;
+        system("CLS");
 
         if (dialogue_choice == "1"){
             choices.addDialogueChoice("Dueled the Cyberdemon.");
@@ -3476,7 +3968,7 @@ void scenarioB2 (Player &player, Consumable consumables[], Dialogue_List &choice
             Sleep(3000);
 
              if (track == "ShootingRange"){
-                cout << "\n\n\"Let's party!\"" << endl;
+                cout << "\n\n\"Let's party!\n\"" << endl;
                 Sleep(3000);
             }
             else{
@@ -3587,7 +4079,7 @@ void scenarioB2 (Player &player, Consumable consumables[], Dialogue_List &choice
     
     cout << "\n\n\"System Meltdown will begin in 5 minutes. Please evacuate. Please evacuate.";
     Sleep(3000);
-    cout << "\n\nHaving kiled the Cyberdemon, you both head into the rocket.";
+    cout << "\n\nHaving killed the Cyberdemon, you both head into the rocket.";
     Sleep(3000);
     cout << "\n\n\"We have a lot of time to kill, " << player.getName() << ".\"";
     Sleep(3000);
@@ -3615,7 +4107,7 @@ void scenarioB2 (Player &player, Consumable consumables[], Dialogue_List &choice
     Sleep(5000);
     cout << "\n\n\"Are you single?\"";
     Sleep(5000);
-    cout << "\n\nWhat?";
+    cout << "\n\n\"What? What do you mean how do I know your name? You just ruined the mood!\"";
     Sleep(5000);
     cout << "\n\nYou win! You have escaped the zombies!";
     
@@ -3633,7 +4125,6 @@ void scenarioB2 (Player &player, Consumable consumables[], Dialogue_List &choice
         else if (choice_again == "N" || choice_again == "n") {
             cout << "Thank you for playing Too Alive to Die!";
             Sleep(4000);
-            exit(0);
         } 
                 
         else {
@@ -3663,6 +4154,9 @@ void scenarioB(Player& player, Consumable consumables[], Dialogue_List &choices)
     intro();
     battle_start_animation();
     battle_start(player, enemy, consumables, choices);
+        if (death_flag == 1){
+        return;
+    }
     Sleep(2000);
     PlaySound(TEXT("Sound Effects/Pick Up.wav"), NULL, SND_FILENAME | SND_ASYNC);
     cout << "\n\nYou picked up 5 Handgun Ammo!";
@@ -3672,7 +4166,6 @@ void scenarioB(Player& player, Consumable consumables[], Dialogue_List &choices)
     Sleep(2000);
     cout << "\n\nThe shadow falls to the ground. It twitches, before it screeches really loud.";
     Sleep(2000);
-    //Playsound
     cout << "\n\nNext thing you know, more of the shadows go towards your position.";
     Sleep(2000);
     cout << "\n\nYou run, going straight. You face three directions, the left, the right, and the front.";
@@ -3683,10 +4176,12 @@ void scenarioB(Player& player, Consumable consumables[], Dialogue_List &choices)
     Sleep(2000);
     cout << "\n\nYou run straight, not turning back, and reach a corner. There is a door in front of you. It probably leads to a room. There's another way to the right.";
     Sleep(2000);
-    cout << "\n\nYou do:\n1. Go through the door.\n2. Go right.\n";
+    
     do{
+        cout << "\n\nYou do:\n1. Go through the door.\n2. Go right.\n";
         flag_choice = 0;
         cin >> dialogue_choice;
+        system("CLS");
         if (dialogue_choice == "1"){
             choices.addDialogueChoice("Went through the door.");
             scenarioB1(player, consumables, choices);
@@ -3708,8 +4203,10 @@ void scenarioB(Player& player, Consumable consumables[], Dialogue_List &choices)
 
 int main(){
     
-    do{
+    auto startTime = chrono::steady_clock::now();
 
+    do{
+    
     system("CLS");
     srand(time(NULL));
 
@@ -3764,6 +4261,7 @@ int main(){
     player.setName(playerName);
     cout << "\nIs " << player.getName() << " your name? [Y/n]: ";
     cin >> choice_confirm;
+    system("CLS");
 
     if (choice_confirm == "y" || choice_confirm == "Y"){
         cout << "\nYou remember your name. It's " << player.getName() << ".";
@@ -3796,6 +4294,7 @@ int main(){
         Sleep(2000);
         cout << "\n\nWhat will you choose?\n";
         cin >> ClassName;
+        system("CLS");
 
         if (ClassName == "1" || ClassName == "Abundance" || ClassName == "abundance"){
             cout << "\n\nAbundance is the start of life, before it extinguishes. It prospers and lives, until it withers and dies.";
@@ -3840,6 +4339,7 @@ int main(){
     do{
     cout << "\n1. Read the piece of paper.\n2. --> Get out of the room.\n3. Peek out." << endl;
     cin >> dialogue_choice;
+    system("CLS");
     Sleep(1500);
 
     if (dialogue_choice == "1"){
@@ -3872,6 +4372,7 @@ int main(){
     do{
         cout << "\n1. --> Investigate the body.\n2. --> Continue walking through the corridor.\n";
         cin >> dialogue_choice;
+        system("CLS");
         Sleep(2000);
         flag_choice = 0;
             if (dialogue_choice  == "1"){
@@ -3881,7 +4382,7 @@ int main(){
                 cout << "\n\nYour eyes catch a glimpse of the body's hand. It's a handgun. You grab it immediately, and instinctively back away. Whatever caused all of this must be dangerous.";
                 addWeapon (collectedWeapons, "Handgun");
                 PlaySound(TEXT("Music/Looming Dread.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
-                handgun_ammo = 3;
+                handgun_ammo = 4;
                 flag_choice = 1;
                 scenarioA(player, consumables, choices);
             }
@@ -3903,7 +4404,10 @@ int main(){
 
 }while (choice_again == "Y" || choice_again == "y");
 
-    
+auto endTime = chrono::steady_clock::now();
+auto duration = chrono::duration_cast<chrono::seconds>(endTime - startTime);
+cout << "\n\nExecution Time: " << duration.count() << " s" << endl;
+
 
 return 0;
 
