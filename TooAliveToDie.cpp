@@ -1264,6 +1264,7 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
 
             else if (choice_battle == "4"){
                 checkAmmo();
+                Sleep(3000);
             }
 
             else if (choice_battle == "OVER9000") {
