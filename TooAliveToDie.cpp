@@ -868,7 +868,7 @@ class Player {
         void Ultimate(Enemy &enemy){
             cout << "\n\n" << getName() << " uses their Ultimate!";
             if (getClass() == "Gunslinger"){
-                setDamage(100);
+                setDamage(175);
                 PlaySound(TEXT("Sound Effects/Ultimate_Gunslinger.wav"), NULL, SND_FILENAME | SND_ASYNC);
                 cout << "\n\n" <<  getName() << " materializes an M4A1 from their body, and unleashes its power for a short while!";
                 Sleep(9100);
@@ -933,6 +933,10 @@ void addWeapon(string collectedWeapons[], string weapon){
     cout << "\n\n" << weapon << " is added to your inventory!";
     Sleep(3000);
     numcollectedWeapons++;
+}
+
+void clearWeapons(std::string collectedWeapons[], int& numCollectedWeapons) {
+    numCollectedWeapons = 0;
 }
 
 void checkAmmo(){
@@ -1119,7 +1123,7 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
                         }
                         else {
                             cout << "\nYou don't have any Handgun Ammo left!";
-                            Sleep(3000);
+                            Sleep(2000);
                         }
 
                     }
@@ -1134,7 +1138,7 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
                         }  
                         else {
                             cout << "\nYou don't have any AR15 Ammo left!";
-                            Sleep(3000);
+                            Sleep(2000);
                         }
                     }
                     else if (choice_weapon == "Sniper"){
@@ -1148,7 +1152,7 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
                         }  
                         else {
                             cout << "\nYou don't have any Sniper Ammo left!";
-                            Sleep(3000);
+                            Sleep(2000);
                         }
                     }
                     else if (choice_weapon == "Shotgun"){
@@ -1162,7 +1166,7 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
                         }  
                         else {
                             cout << "\nYou don't have any Shotgun ammo left!";
-                            Sleep(3000);
+                            Sleep(2000);
                         }
                     }
                     else if (choice_weapon == "MP5"){
@@ -1176,7 +1180,7 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
                         }  
                         else {
                             cout << "\nYou don't have any MP5 Ammo left!";
-                            Sleep(3000);
+                            Sleep(2000);
                         }
                     }
                     else if (choice_weapon == "Red9"){
@@ -1190,7 +1194,7 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
                         }  
                         else {
                             cout << "\nYou don't have any Red9 Ammo left!";
-                            Sleep(3000);
+                            Sleep(2000);
                         }
                     }
                     else if (choice_weapon == "Grenade Launcher"){
@@ -1204,14 +1208,14 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
                         }  
                         else {
                             cout << "\nYou don't have any Grenade Launcer Ammo left!";
-                            Sleep(3000);
+                            Sleep(2000);
                         }
                     }
 
                 }
                 else {
                     cout << "\n\nInvalid choice. Try again.";
-                    Sleep(3000);
+                    Sleep(2000);
                 }
                 
                 
@@ -1246,7 +1250,7 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
                 } 
                 else{
                     cout << "\nYou don't have enough of that item!";
-                    Sleep(3000);
+                    Sleep(2000);
                 } 
 
             }
@@ -1264,7 +1268,9 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
 
             else if (choice_battle == "4"){
                 checkAmmo();
-                Sleep(3000);
+                Sleep(2000);
+                cout << "\n\nInput any key to go back: ";
+                cin >> choice_battle;
             }
 
             else if (choice_battle == "OVER9000") {
@@ -1450,6 +1456,7 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
                 else if (choice_again == "N" || choice_again == "n") {
                     cout << "Thank you for playing Too Alive to Die!";
                     Sleep(4000);
+                    flag_choice = 1;
                     death_flag = 1;
                 } 
                 
@@ -1919,7 +1926,8 @@ void scenarioA2(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
     cout << "\n\n\"It is the pinnacle of human evolution!\" The man shouts, \"I hired you, Dr. Santiago, to achieve this dream!\"";
     Sleep(4000);
     cout << "\n\n\"And you, patient!\" The man exclaims, \"Weren't you a product of the experiments!? Your new power, is there!\"";
-    Sleep(5000);
+    Sleep(6000);
+    system("CLS");
     cout << "\n\n\"You, " << player.getName() << ", are Patient One! The only successful host after Patient Zero!\""; 
     Sleep(4000);
     cout << "\n\nWhat is he saying? You were the successful patient all this time...? But what about the amnesia?";
@@ -2319,7 +2327,10 @@ void scenarioA1(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
             battle_start(player, A1enemy4, consumables, choices);
             if (death_flag == 1){
                 return;
-            }             
+            }       
+            cout << "\n\nThe weak Infected drops a Metal Pipe!";
+            Sleep(2000);      
+            addWeapon(collectedWeapons, "Metal Pipe");
             flag_choice = 1;
         }
         else if (dialogue_choice == "2"){
@@ -2338,6 +2349,9 @@ void scenarioA1(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
             if (death_flag == 1){
                 return;
             }  
+            cout << "\n\nThe weak Infected drops a Metal Pipe!";
+            Sleep(2000);      
+            addWeapon(collectedWeapons, "Metal Pipe");
             flag_choice = 1;
         }
         else {
@@ -2346,7 +2360,6 @@ void scenarioA1(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
         }
 
     }while (flag_choice == 0);
-
 
     cout << "\n\n??? gives you 5 Handgun Ammo!";
     PlaySound(TEXT("Sound Effects/Pick Up.wav"), NULL, SND_FILENAME | SND_ASYNC);
@@ -2370,6 +2383,8 @@ void scenarioA1(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
     cout << "\n\nIt seems that the little girl is doing the same. Though her voice sounds more strained.";
     Sleep(3000);
     cout << "\n\n\"Rena.\" She says.";
+    Rena2_flag = 1;
+    Rena1_flag = 0;
     Sleep(3000);
     do{
         flag_choice = 0;
@@ -2520,7 +2535,7 @@ void scenarioA1(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
             choices.addDialogueChoice("Read the note.");
             cout << "\n\nThere's a lot of words on the note. They seem to be describing a certain chemical.";
             Sleep(4000);
-            cout << "\n\nYou don't know what the first part means due to the medical jargo. It takes a while to understand.";
+            cout << "\n\nYou don't know what the first part means due to the medical jargon. It takes a while to understand.";
             Sleep(4000);
             cout << "\n\nThe last part, you can read. It says that the tube contains the suppressant for the virus.";
             Sleep(4000);
@@ -2565,6 +2580,7 @@ void scenarioA1(Player &player, Enemy &enemy, Consumable consumables[], Dialogue
         cout << "\n\nIt must be the one that stays in the Biology Lab. It even is holding one of its bear traps on hand.";
         Sleep(4000);
         cout << "\n\nYou fight the Butcher! Final boss!";
+        Butcher();
         Sleep(3000);
         A1enemy.pop();
         Enemy &A1enemy8 = A1enemy.top();
@@ -4401,6 +4417,8 @@ int main(){
             else {
                 cout << "\nTry again.\n";
             }
+
+            clearWeapons(collectedWeapons, numcollectedWeapons);
     }while (flag_choice == 0);
 
 }while (choice_again == "Y" || choice_again == "y");
