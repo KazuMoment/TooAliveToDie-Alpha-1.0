@@ -3385,23 +3385,29 @@ void scenarioB1(Player &player, Consumable consumables[], Dialogue_List &choices
         Sleep(4000);
         cout << "\n\nJACK offers you a hand.";
         PlaySound(TEXT("Music/Drive.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
-        Sleep(3000);
+        Sleep(5000);
         cout << "\n\n\"Shake it.\"";
-        Sleep(3000);
+        Sleep(5000);
 
         do{
             cout << "\n\nYou do:\n1. --> Accept.\n2. --> Decline.\n";
             cin >> dialogue_choice;
             system("CLS");
             if (dialogue_choice == "1"){
+                Sleep(2000);
                 cout << "\n\nYou shake his hand.";
                 flag_choice = 1;
             }
             else if (dialogue_choice == "2"){
+                Sleep(2000);
                 cout << "\n\n\"Hm. Not the physical type.\" He says, before giving you his Magnum.";
+                Sleep(5000);
                 cout << "\n\n\"How about something sentimental? No?\" He asks again. You seem to shake your head instinctively.";
+                Sleep(5000);
                 cout << "\n\n\"It's mine?. Huh. You're right about that.";
+                Sleep(5000);
                 cout << "\n\n\"If you do need it, just call it. MAG.\"";
+                Sleep(5000);
                 flag_choice = 1;
             }
             else{
