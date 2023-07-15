@@ -4201,7 +4201,7 @@ void scenarioB(Player& player, Consumable consumables[], Dialogue_List &choices)
     Sleep(2000);
     
     do{
-        cout << "\n\nYou do:\n1. Go through the door.\n2. Go right.\n";
+        cout << "\n\nYou do:\n1. --> Go through the door.\n2. --> Go right.\n";
         flag_choice = 0;
         cin >> dialogue_choice;
         system("CLS");
