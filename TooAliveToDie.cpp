@@ -1058,7 +1058,7 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
             if (choice_battle == "1"){
                 int choice_weaponNumber;
                 weaponInventory();
-                cout << "\n\nPress any number other than the weapon choices to go back";
+                cout << "\nPress any number other than the weapon choices to go back: ";
                 while(!(cin >> choice_weaponNumber)){
                     cin.clear();
                     cout << "\nInvalid input. Try again.\n";
