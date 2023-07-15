@@ -328,7 +328,7 @@ void Butcher(){
     cout << "                                .@@%#             " << endl;
     Sleep(100);
     cout << "                                *@@@%             " << endl;
-    Sleep(100);
+    Sleep(4000);
 }
 
 
@@ -388,7 +388,7 @@ void Titan(){
     cout << "\t\t\t\t    :--+=:---:..                 *%#*%#++++=+:         " << endl;
     Sleep(100);
     cout << "\t\t\t\t                                 =*#+##+#+#+*+         " << endl;
-    Sleep(100);
+    Sleep(4000);
 }
 
 void Gamma(){
@@ -3991,8 +3991,7 @@ void scenarioB2 (Player &player, Consumable consumables[], Dialogue_List &choice
             Sleep(3000);
 
              if (track == "ShootingRange"){
-                cout << "\n\n\"Let's party!\n\"" << endl;
-                Sleep(3000);
+                cout << "\n\n\"Let's party!\"\n";
             }
             else{
                 track = "DreadFearful";
