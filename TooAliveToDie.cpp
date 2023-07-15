@@ -1058,6 +1058,7 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
             if (choice_battle == "1"){
                 int choice_weaponNumber;
                 weaponInventory();
+                cout << "\n\nPress any number other than the weapon choices to go back";
                 while(!(cin >> choice_weaponNumber)){
                     cin.clear();
                     cout << "\nInvalid input. Try again.\n";
@@ -1207,15 +1208,11 @@ void battle_start(Player& player, Enemy& enemy, Consumable consumables[], Dialog
                             flag_choice = 1; 
                         }  
                         else {
-                            cout << "\nYou don't have any Grenade Launcer Ammo left!";
+                            cout << "\nYou don't have any Grenade Launcher Ammo left!";
                             Sleep(2000);
                         }
                     }
 
-                }
-                else {
-                    cout << "\n\nInvalid choice. Try again.";
-                    Sleep(2000);
                 }
                 
                 
@@ -2928,7 +2925,7 @@ void scenarioB1(Player &player, Consumable consumables[], Dialogue_List &choices
     Sleep(2000);
  
     do{
-        cout << "\n\nYou say:\n1. What is this facility for?\n2. What's your name?\n3. --> Let's go.\n";
+        cout << "\n\nYou say:\n1. What is this facility for?\n --> 2. What's your name?\n3. --> Let's go.\n";
         flag_choice = 0;
         cin >> dialogue_choice;
         system("CLS");
