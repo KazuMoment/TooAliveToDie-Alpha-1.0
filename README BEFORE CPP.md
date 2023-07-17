@@ -1,6 +1,8 @@
 # TooAliveToDie-Alpha-1.0
 A simple text adventure game in C++ WIP
 
+To donwnload, go to Code, and then download ZIP. Extract the folder. 
+
 Due to cicumstances of compilers needing a linker for using lwinmm for PlaySound() to work, it is recommeded to do any of the methods below:
 - Compile the cpp in MSVC
 - If using g++ or gcc or CodeBlocks or any compiler that cannot find lwinmm, use a linker for lwinmm
